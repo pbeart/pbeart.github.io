@@ -1,0 +1,32 @@
+{% extends "rootpage.jinja.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    <div id="inner-body">
+        <div id="top-bar">
+            <a class="display-link" href="/" id="global-title">Patrick Beart</a>
+            <div id="top-bar-items">
+                <a class="display-link" href="/about">
+                    About
+                </a>
+                <a class="display-link" href="/contact">
+                    Contact
+                </a>
+                <!--<div id="top-bar-social-cluster">
+                    <a href="?"><img src="/LI-In-Bug.png" /></a>
+                    <img src="/github-mark.png" />
+                </div>-->
+            </div>
+        </div>
+        <div id="body-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div id="footer">
+            <div>
+                © Patrick Beart 2024
+            </div>
+        </div>
+    </div>
+{% endblock %}

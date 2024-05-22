@@ -1,0 +1,21 @@
+{% extends "page.jinja.html" %}
+{% block content %}
+
+    
+
+    {% for post in posts %}
+        <div class="article-card">
+            {{ mlink(post.title, post.url, 'class=article-card-title') }}
+            <div class="article-card-date">{{ post.published | format_datetime }}</div>
+            {{ post.extract }}
+            
+        </div>
+        <div class="article-card">
+            <a href="{{ post.url }}" class="article-card-title"><span class="link-text">{{ post.title }}</span> <span class="link-arrow">🡭</span></a>
+            <div class="article-card-date">{{ post.published | format_datetime }}</div>
+            {{ post.extract }}
+            
+        </div>
+    {% endfor %}
+
+{% endblock %}
