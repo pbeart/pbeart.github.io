@@ -10,6 +10,8 @@ from markdown.inlinepatterns import InlineProcessor, Pattern
 from markdown.extensions import Extension
 from markdown.treeprocessors import Treeprocessor
 
+IS_DEPLOYMENT = "CI" in os.environ
+
 @dataclass
 class Post:
     title: str
@@ -104,7 +106,7 @@ class CustomLinkExtension(Extension):
         md.inlinePatterns.register(CustomLinkProcessor("\[(.*)\]\((.*)\)", md), 'customlink', 300)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--no-math", nargs="?")
+parser.add_argument("--no-math", action="store_true")
 args = parser.parse_args()
 
 template_env.filters["format_datetime"] = format_datetime
@@ -123,31 +125,32 @@ posts = []
 for markdown_path in glob.iglob(os.path.join("posts","**/*.md"), recursive=True):
     
     try:
-        with open(markdown_path, "r") as markdown_source:
+        with open(markdown_path, "r", encoding="utf-8") as markdown_source:
             
             extensions = ['meta', CustomLinkExtension()]
-            if args.no_math:
+            if not args.no_math:
                 extensions.append(MathExtension())
 
             md = markdown.Markdown(extensions=extensions)
 
-            html_content = md.convert(markdown_source.read())
+            converted_content = md.convert(markdown_source.read())
 
-            html_content = process_template(html_content)
+            html_content = process_template(converted_content)
 
             metadata = md.Meta
-            print(metadata)
 
             # Validate metadata
             [post_title] = metadata["title"]
             [post_publish_date] = metadata["published"]
             [post_extract] = metadata["extract"]
-            math_enabled = "math_enabled" in metadata
             
 
             rel_path_md = Path(*Path(markdown_path).parts[1:])
 
-            post_html_path = rel_path_md.with_suffix(".html")
+            if IS_DEPLOYMENT: # don't need .html bit for GH pages in a link
+                post_html_path = rel_path_md.with_suffix("")
+            else:
+                post_html_path = rel_path_md.with_suffix(".html")
 
 
             post = Post(
@@ -156,7 +159,7 @@ for markdown_path in glob.iglob(os.path.join("posts","**/*.md"), recursive=True)
                 published=dateutil.parser.parse(post_publish_date),
                 extract=post_extract,
                 html=html_content,
-                math_enabled=math_enabled
+                math_enabled=True
             )
 
             posts.append(post)

@@ -1,13 +1,17 @@
 body {
     font-family: "EB Garamond";
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
+    --white-colour: rgb(245, 245, 235);
 }
 code {
-    font-size: 20px;
+    font-size: 18px;
 }
 p {
-    font-size: 22px
+    font-size: 20px;
+    text-align: justify;
+    text-justify: newspaper;
+    word-break: normal;
 }
 
 #top-bar #global-title {
@@ -40,7 +44,13 @@ h1 {
 h2 {
     font-weight: 600;
     font-family: "Inter Tight", sans-serif;
-    font-size: 32px
+    font-size: 32px;
+    margin-top: 28px;
+    margin-bottom: 14px;
+}
+
+h3 {
+    font-family: "Inter Tight", sans-serif;
 }
 
 .link-button {
@@ -51,15 +61,25 @@ h2 {
 
 .article-card-title {
     font-weight: 500;
+    font-size: 22px;
     font-family: "Inter Tight";
 }
 
 .article-card-date {
-    font-weight: 400;
-    font-size: 16px;
-    margin-top: -12px;
+    margin-top: -10px;
+    font-size: 16px;    
+}
+
+.date {
     font-family: "Inter Tight";
-    color: #333
+    color: #4f4f4f;
+    
+    font-weight: 400;
+}
+
+.post-page-date {
+    margin-top: 6px;
+    margin-bottom: 24px;
 }
 
 .article-card {
@@ -89,12 +109,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: stretch;
-    background-color: rgb(240, 240, 231);
+    background-color: rgb(30, 47, 81);
     min-height: 100vh;
 }
 
 #inner-body {
-    background-color: white;
+    background-color: var(--white-colour);
     margin: 0px 250px;
     flex-grow: 1;
     padding: 0px 32px;
@@ -123,7 +143,7 @@ body {
 a {
     color: unset;
     display: inline-flex;
-    align-items: center;
+    align-items: start;
     text-decoration: none;
 }
 
@@ -155,12 +175,12 @@ a .link-arrow {
 }
 
 a .link-arrow.link-arrow-s {
-    margin-bottom: -4px;
+    margin-bottom: -3px;
 }
 
 a .link-text:not(.display-link) {
     text-decoration-color: #000f;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 
@@ -175,7 +195,7 @@ a:hover {
     align-items: center;
     padding: 32px 32px;
     justify-content: start;
-    background-color: white;
+    background-color: var(--white-colour);
     margin: 0 -32px;
 }
 

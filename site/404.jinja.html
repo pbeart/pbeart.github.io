@@ -1,0 +1,11 @@
+{% extends "page.jinja.html" %}
+{% block head %}
+    {{ super() }}
+    <title>Page not found - Patrick Beart</title>
+{% endblock %}
+{% block content %}
+<div class="flow">
+    <div class="title">Page not found</div>
+    <p>Sorry, that page doesn't seem to exist. Please {{ mlink("contact me", "/contact", "") }} if you believe this is an issue.</p>
+</div>
+{% endblock %}
