@@ -147,11 +147,8 @@ for markdown_path in glob.iglob(os.path.join("posts","**/*.md"), recursive=True)
 
             rel_path_md = Path(*Path(markdown_path).parts[1:])
 
-            if IS_DEPLOYMENT: # don't need .html bit for GH pages in a link
-                post_html_path = rel_path_md.with_suffix("")
-            else:
-                post_html_path = rel_path_md.with_suffix(".html")
 
+            post_html_path = rel_path_md.with_suffix(".html")
 
             post = Post(
                 title=post_title,
