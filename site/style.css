@@ -30,10 +30,21 @@ p {
 .title {
     font-weight: 700;
     font-family: "Inter Tight", sans-serif;
-    font-size: 56px;
+    font-size: 48px;
     margin-right: 32px;
     margin-top: 0px;
+    word-wrap: break-word;
+    hyphens: auto;
+    word-break: normal;
 }
+
+@media screen and (max-width: 800px) {
+
+    .title {
+        font-size: 36px
+    }
+}
+
 
 h1 {
     font-weight: 600;
@@ -115,11 +126,17 @@ body {
 
 #inner-body {
     background-color: var(--white-colour);
-    margin: 0px 250px;
+    margin: 0px min(20%, 250px);
     flex-grow: 1;
     padding: 0px 32px;
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width: 900px) {
+    #inner-body {
+        margin: 0px max(16px, 7%)
+    }
 }
 
 #body-content {
@@ -197,6 +214,7 @@ a:hover {
     justify-content: start;
     background-color: var(--white-colour);
     margin: 0 -32px;
+    
 }
 
 #top-bar * {
@@ -204,17 +222,18 @@ a:hover {
     margin: 0px
 }
 
-#top-bar h1 {
+#top-bar > a {
     margin: 0px;
     margin-right: 96px;
     line-height: 100%;
 }
 
 #top-bar-items {
-    margin-right: auto;
+    /*margin-right: auto;*/
     display: flex;
     justify-content: space-around;
-    flex-grow: 1;
+    margin-right: auto;
+    flex-grow: 1
 }
 
 #top-bar-items a {
@@ -223,6 +242,27 @@ a:hover {
     font-weight: 600;
     margin-top: 4px
 }
+
+@media screen and (max-width: 600px) {
+    
+    #top-bar {
+        flex-direction: column;
+    }
+
+    #top-bar #global-title {
+        margin-right: 0px;
+        text-align: center;
+    }
+    
+    #top-bar-items {
+        /*margin-right: auto;*/
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 16px;
+    }
+}
+
 
 h1, h2, h3,
 h4, h5, h6 {
@@ -234,7 +274,6 @@ h4, h5, h6 {
     flex-direction: column;
     align-items: center;
     margin: 48px 0px;
-    
     margin-top:  auto;
 }
 

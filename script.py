@@ -175,7 +175,7 @@ context = {
     "posts": posts
 }
 
-for filename in glob.iglob(os.path.join("site", '**/*'), recursive=True):
+for filename in (path for path in glob.iglob(os.path.join("site", '**/*'), recursive=True) if not os.path.isdir(path)):
     if filename.endswith(".jinja.html"):
         with open(filename, "rb") as f:
             rel_path = Path(*Path(filename).parts[1:])
@@ -190,4 +190,6 @@ for filename in glob.iglob(os.path.join("site", '**/*'), recursive=True):
     else:
         rel_path = Path(*Path(filename).parts[1:])
         new_path = "build" / rel_path
+        new_path.parent.mkdir(parents=True, exist_ok=True)
+
         shutil.copy(filename, new_path)
